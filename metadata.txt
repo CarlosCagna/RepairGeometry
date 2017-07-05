@@ -16,8 +16,8 @@ email=carlos.cagna@ibge.gov.br
 
 about= Use V.clean tools in sequence with different variables in select features (É possível selecionar quais ferramentas do V.clean será usada nas feições selecionadas, bem como as variáveis de cada uma das ferramentas.) 
 
-tracker=https://github.com/CarlosCagna/Qgis/tree/master/RepairGeometry
-repository=https://github.com/CarlosCagna/Qgis/tree/master/RepairGeometry
+tracker=https://github.com/CarlosCagna/RepairGeometry/issues
+repository=https://github.com/CarlosCagna/RepairGeometry
 # End of mandatory metadata
 
 # Recommended items:
