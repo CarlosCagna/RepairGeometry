@@ -388,8 +388,10 @@ class RepairGeometry:
                     self.dlg.checkBox_9.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('prune'))) 
                     self.dlg.checkBox_10.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('rmarea'))) 
                     self.dlg.checkBox_11.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('rmline'))) 
+                    
                     self.dlg.checkBox_12.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('rmsa')))
-                    self.dlg.checkBox_12.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('load_errors')))            
+
+                    self.dlg.errors_checkBox.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('load_errors')))            
 
                     
         
@@ -453,6 +455,7 @@ class RepairGeometry:
         QgsExpressionContextUtils.setProjectVariable('rmarea',self.dlg.checkBox_10.isChecked()) 
         QgsExpressionContextUtils.setProjectVariable('rmline',self.dlg.checkBox_11.isChecked()) 
         QgsExpressionContextUtils.setProjectVariable('rmsa',self.dlg.checkBox_12.isChecked()) 
+        
         QgsExpressionContextUtils.setProjectVariable('load_errors',self.dlg.errors_checkBox.isChecked()) 
 
         pass
@@ -469,7 +472,7 @@ class RepairGeometry:
             self.OUTPUT = QgsVectorLayer(clean["output"], ("clean_" + v_clean_name), "ogr") 
 
             error = QgsVectorLayer(clean["error"], ("error_" + v_clean_name), "ogr")
-            if error.featureCount() <> 0 and QgsExpressionContextUtils.projectScope().variable('load_errors') == 'True':
+            if error.featureCount() <> 0 and QgsExpressionContextUtils.projectScope().variable('load_errors') == 'true':
                 QgsMapLayerRegistry.instance().addMapLayer(error)        
                                                
     def run(self):
