@@ -226,8 +226,8 @@ class RepairGeometry:
         #show the dialog
         self.dlg = RepairGeometryDialog()
         
-        if self.iface.activeLayer()<> None:
-            if QgsExpressionContextUtils.projectScope().variable('set') <> u'True':
+        if QgsExpressionContextUtils.projectScope().variable('set') <> u'True':
+            if self.iface.activeLayer()<> None:
                 self.dlg.checkBox_1.setChecked(True)         
                 self.dlg.checkBox_2.setChecked(True)           
                 self.dlg.checkBox_12.setChecked(True)
@@ -328,71 +328,72 @@ class RepairGeometry:
                     self.dlg.minarea_10.setText(z)
                     self.dlg.minarea_11.setText(z)
                     self.dlg.minarea_12.setText(z)
-                                
-                    
-            else:
-            
-                    self.dlg.threshold_0.setText(QgsExpressionContextUtils.projectScope().variable('threshold_0'))
-                    self.dlg.threshold_1.setText(QgsExpressionContextUtils.projectScope().variable('threshold_1'))
-                    self.dlg.threshold_2.setText(QgsExpressionContextUtils.projectScope().variable('threshold_2'))
-                    self.dlg.threshold_3.setText(QgsExpressionContextUtils.projectScope().variable('threshold_3'))
-                    self.dlg.threshold_4.setText(QgsExpressionContextUtils.projectScope().variable('threshold_4'))
-                    self.dlg.threshold_5.setText(QgsExpressionContextUtils.projectScope().variable('threshold_5'))
-                    self.dlg.threshold_6.setText(QgsExpressionContextUtils.projectScope().variable('threshold_6'))
-                    self.dlg.threshold_7.setText(QgsExpressionContextUtils.projectScope().variable('threshold_7'))
-                    self.dlg.threshold_8.setText(QgsExpressionContextUtils.projectScope().variable('threshold_8'))
-                    self.dlg.threshold_9.setText(QgsExpressionContextUtils.projectScope().variable('threshold_9'))
-                    self.dlg.threshold_10.setText(QgsExpressionContextUtils.projectScope().variable('threshold_10'))
-                    self.dlg.threshold_11.setText(QgsExpressionContextUtils.projectScope().variable('threshold_11'))
-                    self.dlg.threshold_12.setText(QgsExpressionContextUtils.projectScope().variable('threshold_12'))
-                    
-                    self.dlg.snap_0.setText(QgsExpressionContextUtils.projectScope().variable('snap_0'))
-                    self.dlg.snap_1.setText(QgsExpressionContextUtils.projectScope().variable('snap_1'))
-                    self.dlg.snap_2.setText(QgsExpressionContextUtils.projectScope().variable('snap_2'))
-                    self.dlg.snap_3.setText(QgsExpressionContextUtils.projectScope().variable('snap_3'))
-                    self.dlg.snap_4.setText(QgsExpressionContextUtils.projectScope().variable('snap_4'))
-                    self.dlg.snap_5.setText(QgsExpressionContextUtils.projectScope().variable('snap_5'))
-                    self.dlg.snap_6.setText(QgsExpressionContextUtils.projectScope().variable('snap_6'))
-                    self.dlg.snap_7.setText(QgsExpressionContextUtils.projectScope().variable('snap_7'))
-                    self.dlg.snap_8.setText(QgsExpressionContextUtils.projectScope().variable('snap_8'))
-                    self.dlg.snap_9.setText(QgsExpressionContextUtils.projectScope().variable('snap_9'))
-                    self.dlg.snap_10.setText(QgsExpressionContextUtils.projectScope().variable('snap_10'))
-                    self.dlg.snap_11.setText(QgsExpressionContextUtils.projectScope().variable('snap_11'))
-                    self.dlg.snap_12.setText(QgsExpressionContextUtils.projectScope().variable('snap_12'))
+                            
+                
+        else:
+        
+                self.dlg.threshold_0.setText(QgsExpressionContextUtils.projectScope().variable('threshold_0'))
+                self.dlg.threshold_1.setText(QgsExpressionContextUtils.projectScope().variable('threshold_1'))
+                self.dlg.threshold_2.setText(QgsExpressionContextUtils.projectScope().variable('threshold_2'))
+                self.dlg.threshold_3.setText(QgsExpressionContextUtils.projectScope().variable('threshold_3'))
+                self.dlg.threshold_4.setText(QgsExpressionContextUtils.projectScope().variable('threshold_4'))
+                self.dlg.threshold_5.setText(QgsExpressionContextUtils.projectScope().variable('threshold_5'))
+                self.dlg.threshold_6.setText(QgsExpressionContextUtils.projectScope().variable('threshold_6'))
+                self.dlg.threshold_7.setText(QgsExpressionContextUtils.projectScope().variable('threshold_7'))
+                self.dlg.threshold_8.setText(QgsExpressionContextUtils.projectScope().variable('threshold_8'))
+                self.dlg.threshold_9.setText(QgsExpressionContextUtils.projectScope().variable('threshold_9'))
+                self.dlg.threshold_10.setText(QgsExpressionContextUtils.projectScope().variable('threshold_10'))
+                self.dlg.threshold_11.setText(QgsExpressionContextUtils.projectScope().variable('threshold_11'))
+                self.dlg.threshold_12.setText(QgsExpressionContextUtils.projectScope().variable('threshold_12'))
+                
+                self.dlg.snap_0.setText(QgsExpressionContextUtils.projectScope().variable('snap_0'))
+                self.dlg.snap_1.setText(QgsExpressionContextUtils.projectScope().variable('snap_1'))
+                self.dlg.snap_2.setText(QgsExpressionContextUtils.projectScope().variable('snap_2'))
+                self.dlg.snap_3.setText(QgsExpressionContextUtils.projectScope().variable('snap_3'))
+                self.dlg.snap_4.setText(QgsExpressionContextUtils.projectScope().variable('snap_4'))
+                self.dlg.snap_5.setText(QgsExpressionContextUtils.projectScope().variable('snap_5'))
+                self.dlg.snap_6.setText(QgsExpressionContextUtils.projectScope().variable('snap_6'))
+                self.dlg.snap_7.setText(QgsExpressionContextUtils.projectScope().variable('snap_7'))
+                self.dlg.snap_8.setText(QgsExpressionContextUtils.projectScope().variable('snap_8'))
+                self.dlg.snap_9.setText(QgsExpressionContextUtils.projectScope().variable('snap_9'))
+                self.dlg.snap_10.setText(QgsExpressionContextUtils.projectScope().variable('snap_10'))
+                self.dlg.snap_11.setText(QgsExpressionContextUtils.projectScope().variable('snap_11'))
+                self.dlg.snap_12.setText(QgsExpressionContextUtils.projectScope().variable('snap_12'))
 
-                    self.dlg.minarea_0.setText(QgsExpressionContextUtils.projectScope().variable('minarea_0'))
-                    self.dlg.minarea_1.setText(QgsExpressionContextUtils.projectScope().variable('minarea_1'))
-                    self.dlg.minarea_2.setText(QgsExpressionContextUtils.projectScope().variable('minarea_2'))
-                    self.dlg.minarea_3.setText(QgsExpressionContextUtils.projectScope().variable('minarea_3'))
-                    self.dlg.minarea_4.setText(QgsExpressionContextUtils.projectScope().variable('minarea_4'))
-                    self.dlg.minarea_5.setText(QgsExpressionContextUtils.projectScope().variable('minarea_5'))
-                    self.dlg.minarea_6.setText(QgsExpressionContextUtils.projectScope().variable('minarea_6'))
-                    self.dlg.minarea_7.setText(QgsExpressionContextUtils.projectScope().variable('minarea_7'))
-                    self.dlg.minarea_8.setText(QgsExpressionContextUtils.projectScope().variable('minarea_8'))
-                    self.dlg.minarea_9.setText(QgsExpressionContextUtils.projectScope().variable('minarea_9'))
-                    self.dlg.minarea_10.setText(QgsExpressionContextUtils.projectScope().variable('minarea_10'))
-                    self.dlg.minarea_11.setText(QgsExpressionContextUtils.projectScope().variable('minarea_11'))
-                    self.dlg.minarea_12.setText(QgsExpressionContextUtils.projectScope().variable('minarea_12'))
-                    
+                self.dlg.minarea_0.setText(QgsExpressionContextUtils.projectScope().variable('minarea_0'))
+                self.dlg.minarea_1.setText(QgsExpressionContextUtils.projectScope().variable('minarea_1'))
+                self.dlg.minarea_2.setText(QgsExpressionContextUtils.projectScope().variable('minarea_2'))
+                self.dlg.minarea_3.setText(QgsExpressionContextUtils.projectScope().variable('minarea_3'))
+                self.dlg.minarea_4.setText(QgsExpressionContextUtils.projectScope().variable('minarea_4'))
+                self.dlg.minarea_5.setText(QgsExpressionContextUtils.projectScope().variable('minarea_5'))
+                self.dlg.minarea_6.setText(QgsExpressionContextUtils.projectScope().variable('minarea_6'))
+                self.dlg.minarea_7.setText(QgsExpressionContextUtils.projectScope().variable('minarea_7'))
+                self.dlg.minarea_8.setText(QgsExpressionContextUtils.projectScope().variable('minarea_8'))
+                self.dlg.minarea_9.setText(QgsExpressionContextUtils.projectScope().variable('minarea_9'))
+                self.dlg.minarea_10.setText(QgsExpressionContextUtils.projectScope().variable('minarea_10'))
+                self.dlg.minarea_11.setText(QgsExpressionContextUtils.projectScope().variable('minarea_11'))
+                self.dlg.minarea_12.setText(QgsExpressionContextUtils.projectScope().variable('minarea_12'))
+                
 
-                    
-                    self.dlg.checkBox_0.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('break')))
-                    self.dlg.checkBox_1.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('snap')))         
-                    self.dlg.checkBox_2.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('rmdangle')))           
-                    self.dlg.checkBox_3.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('chdangle')))
-                    self.dlg.checkBox_4.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('rmbridge'))) 
-                    self.dlg.checkBox_5.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('chbridge'))) 
-                    self.dlg.checkBox_6.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('rmdupl')))  
-                    self.dlg.checkBox_7.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('rmdac')))  
-                    self.dlg.checkBox_8.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('bpol')))  
-                    self.dlg.checkBox_9.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('prune'))) 
-                    self.dlg.checkBox_10.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('rmarea'))) 
-                    self.dlg.checkBox_11.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('rmline'))) 
-                    
-                    self.dlg.checkBox_12.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('rmsa')))
+                
+                self.dlg.checkBox_0.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('break')))
+                self.dlg.checkBox_1.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('snap')))         
+                self.dlg.checkBox_2.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('rmdangle')))           
+                self.dlg.checkBox_3.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('chdangle')))
+                self.dlg.checkBox_4.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('rmbridge'))) 
+                self.dlg.checkBox_5.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('chbridge'))) 
+                self.dlg.checkBox_6.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('rmdupl')))  
+                self.dlg.checkBox_7.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('rmdac')))  
+                self.dlg.checkBox_8.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('bpol')))  
+                self.dlg.checkBox_9.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('prune'))) 
+                self.dlg.checkBox_10.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('rmarea'))) 
+                self.dlg.checkBox_11.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('rmline'))) 
+                
+                self.dlg.checkBox_12.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('rmsa')))
 
-                    self.dlg.errors_checkBox.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('load_errors')))            
+                self.dlg.errors_checkBox.setChecked(self.str_to_bool(QgsExpressionContextUtils.projectScope().variable('load_errors')))            
 
+                
                     
         
         self.dlg.show() 
