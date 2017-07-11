@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/plugins/RepairGeometry" >
         <file>icon.png</file>
+		<file>set.png</file>
     </qresource>
 </RCC>

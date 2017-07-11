@@ -203,7 +203,7 @@ class RepairGeometry:
         QObject.connect(self.actionRun, SIGNAL("triggered()"), self.run)
         
         self.actionConfigure = QAction(
-        QIcon(':/plugins/RepairGeometry/icon.png'), 
+        QIcon(':/plugins/RepairGeometry/set.png'), 
         u"set v.clean variables", 
         self.iface.mainWindow())
         self.actionConfigure.setWhatsThis(u"set v.clean variables")
