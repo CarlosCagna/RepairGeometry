@@ -1232,7 +1232,7 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-family:'arial,sans-serif'; font-size:medium; color:#000000; background-color:#ffffff;&quot;&gt;remove small angles between lines at nodes&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="text">
-    <string>Threshold</string>
+    <string>Rmsa</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="threshold_12">
