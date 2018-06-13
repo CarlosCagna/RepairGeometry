@@ -10,7 +10,11 @@
 name=Repair Geometry (Reparar Geometria)
 qgisMinimumVersion=2.0
 description= Use V.clean tools in sequence with different variables in select features (Usa a ferramentas V.clean nas feições selecionadas) 
+<<<<<<< HEAD
 version=1.0
+=======
+version=0.1.4
+>>>>>>> 5323c2ae17854992747f3ac9599af9b4649e6f45
 author=Carlos Eduardo Cagna\IBGE
 email=carlos.cagna@ibge.gov.br
 
