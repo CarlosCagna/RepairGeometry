@@ -10,7 +10,7 @@
 name=Repair Geometry (Reparar Geometria)
 qgisMinimumVersion=2.0
 description= Use V.clean tools in sequence with different variables in select features (Usa a ferramentas V.clean nas feições selecionadas) 
-version=0.1.3
+version=1.0
 author=Carlos Eduardo Cagna\IBGE
 email=carlos.cagna@ibge.gov.br
 
@@ -32,7 +32,7 @@ homepage=https://github.com/CarlosCagna/Repair-Geometry
 category=Plugins
 icon=icon.png
 # experimental flag
-experimental=True
+experimental=False
 
 # deprecated flag (applies to the whole plugin, not just a single version)
 deprecated=False

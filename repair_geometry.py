@@ -226,12 +226,12 @@ class RepairGeometry:
         #show the dialog
         self.dlg = RepairGeometryDialog()
         
-        if QgsExpressionContextUtils.projectScope().variable('set') <> u'True':
+        if QgsExpressionContextUtils.projectScope().variable('set_repair') <> u'True':
             if self.iface.activeLayer()<> None:
                 self.dlg.checkBox_1.setChecked(True)         
                 self.dlg.checkBox_2.setChecked(True)           
                 self.dlg.checkBox_12.setChecked(True)
-                QgsExpressionContextUtils.setProjectVariable('set','True')
+                QgsExpressionContextUtils.setProjectVariable('set_repair','True')
                 
                 if iface.activeLayer().crs().mapUnits() == 0:
                     x='3'
@@ -471,18 +471,24 @@ class RepairGeometry:
             print ('self.'+v_clean_name+'_')
             clean = processing.runalg( "grass7:v.clean", self.OUTPUT, v_clean_number, threshold, self.extend, snap , minarea, None, None)                
             self.OUTPUT = QgsVectorLayer(clean["output"], ("clean_" + v_clean_name), "ogr") 
-
-            error = QgsVectorLayer(clean["error"], ("error_" + v_clean_name), "ogr")
-            if error.featureCount() <> 0 and QgsExpressionContextUtils.projectScope().variable('load_errors') == 'true':
-                QgsMapLayerRegistry.instance().addMapLayer(error)        
+            
+                             
+            if self.error == None:
+                 self.error = QgsVectorLayer(clean["error"], ("error_" + v_clean_name), "ogr")
+                 
+                 
+            else:     
+                outputs_QGISMERGEVECTORLAYERS_1=processing.runalg('qgis:mergevectorlayers', [QgsVectorLayer(clean["error"], "error_clean", "ogr"), self.error ],None) 
+                self.error = QgsVectorLayer(outputs_QGISMERGEVECTORLAYERS_1["OUTPUT"], ("error"), "ogr") 
+             
                                                
     def run(self):
         """Run method that performs all the real work"""
         # show the dialog
         inlayer= self.iface.activeLayer()
+        self.error = None
         
-        
-        if QgsExpressionContextUtils.projectScope().variable('set') <> u'True':              
+        if QgsExpressionContextUtils.projectScope().variable('set_repair') <> u'True':              
            self.set_variables()
                 
    
@@ -494,10 +500,10 @@ class RepairGeometry:
             ymax=inlayer.extent().yMaximum()
 
             self.extend =  str(float(xmin)) + ", " +  str(float(xmax))+", " + str(float(ymin))+ ", " +str(float(ymax))
-            
-            self.OUTPUT = inlayer
-
-
+           
+            autoincremental= processing.runalg('qgis:addautoincrementalfield',inlayer,None)           
+            self.OUTPUT = QgsVectorLayer(autoincremental['OUTPUT'], ("autoincremental"), "ogr") 
+                        
             
             if QgsExpressionContextUtils.projectScope().variable('break') == 'true':
                 self.v_clean('break', 0, QgsExpressionContextUtils.projectScope().variable('threshold_0'), QgsExpressionContextUtils.projectScope().variable('snap_0'), QgsExpressionContextUtils.projectScope().variable('minarea_0'))
@@ -525,11 +531,14 @@ class RepairGeometry:
                 self.v_clean('rmline', 11, QgsExpressionContextUtils.projectScope().variable('threshold_11'), QgsExpressionContextUtils.projectScope().variable('snap_11'), QgsExpressionContextUtils.projectScope().variable('minarea_11'))
             if QgsExpressionContextUtils.projectScope().variable('rmsa') == 'true':    
                 self.v_clean('rmsa', 12, QgsExpressionContextUtils.projectScope().variable('threshold_12'), QgsExpressionContextUtils.projectScope().variable('snap_12'), QgsExpressionContextUtils.projectScope().variable('minarea_12'))    
-                        
+            
+            dissolve= processing.runalg('qgis:dissolve', self.OUTPUT,False,'AUTO',None) 
+            remove_field = processing.runalg('qgis:deletecolumn', dissolve['OUTPUT'], "AUTO", None)
+            
+            self.OUTPUT = QgsVectorLayer(remove_field['OUTPUT'], ("final"), "ogr")     
                 
             clean_shape = self.OUTPUT
-                
-            
+           
             inlayer.startEditing()
             select = inlayer.selectedFeatures()
             box = inlayer.boundingBoxOfSelected()
@@ -547,35 +556,14 @@ class RepairGeometry:
             for feat in  clean_shape.getFeatures():
                 inlayer.addFeature(feat)
 
-                
-            if inlayer.attributeDisplayName(0) == u'id':
-                todos_id=[] #faz uma lista de todas id para indetificar aquelas que estao repetidas
-                x=0
-                for feat in inlayer.getFeatures():
-                    if feat.attribute('id') <> NULL:     
-                        todos_id.insert(x, feat.attribute('id'))
-                        x=x+1                            
-                      
-                     
-                for feat in inlayer.getFeatures(): #altera o id que aparecem repetidos para nao ocorrer conflito ao inserir os dados no postgis      
-                       while todos_id.count(feat.attribute('id'))>1:
-                        id_antigo = feat.attribute('id')
-                        feat.setAttribute(inlayer.fieldNameIndex('id'), (max(todos_id)+1) )
-                        inlayer.updateFeature(feat)
-                        todos_id.insert(x, feat.attribute('id'))
-                        todos_id.remove(id_antigo)
-                        x=x+1
-                        inlayer.updateFeature(feat)
-                    
-                for feat in inlayer.getFeatures():
-
-                       if 'QgsPolygonV2' in str(feat.geometry().geometry()):
-                        inlayer.deleteFeature(feat.id())
-                        feat.geometry().convertToMultiType()
-                        inlayer.addFeature(feat)
+            if self.error.featureCount() <> 0 and QgsExpressionContextUtils.projectScope().variable('load_errors') == 'true':
+                QgsMapLayerRegistry.instance().addMapLayer(self.error)                    
                         
             for feat in inlayer.getFeatures(): #seleciona no carvas as features adiconadas 
-                if box.contains(feat.geometry().boundingBox()):
-                    for feat_2 in clean_shape.getFeatures():
-                        if feat.geometry().equals(feat_2.geometry()):
-                            inlayer.select(feat.id())
+                if feat.geometry() <> None:
+                    if box.contains(feat.geometry().boundingBox()):
+                        for feat_2 in clean_shape.getFeatures():
+                            if feat.geometry().equals(feat_2.geometry()):
+                                inlayer.select(feat.id())
+                            
+           
